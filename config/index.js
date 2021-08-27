@@ -10,6 +10,9 @@ const development = require("./env/development");
 const test = require("./env/test");
 const production = require("./env/production");
 
+const defaults = {
+    root: path.join(__dirname, ".."),
+};
 /**
  * Expose
  */

@@ -5,10 +5,11 @@ const join = require("path").join;
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 
+
 const models = join(__dirname, "./models");
 
-// const indexRouter = require("./routes/index");
-// const usersRouter = require("./routes/users");
+const indexRouter = require("./routes/index");
+const usersRouter = require("./routes/users");
 
 // Bootstrap models
 fs.readdirSync(models)
@@ -17,13 +18,16 @@ fs.readdirSync(models)
 
 var app = express();
 
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-// app.use("/api/", indexRouter);
-// app.use("/api/users", usersRouter);
+app.use("/api", indexRouter);
+app.use("/api/users", usersRouter);
 
 module.exports = app;
+
+console.log('App initiated...');
