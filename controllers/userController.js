@@ -3,8 +3,7 @@ const bcrypt = require("bcrypt");
 const asyncHandle = require("../utils/asyncHandle");
 
 exports.create = asyncHandle(async(req, res, next) => {
-    let { password } = req.body;
-    let hashed_password = await bcrypt.hash(password, 10);
+    let hashed_password = await bcrypt.hash(req.body.password, 10);
     const newUser = await User.create({
         username: req.body.username,
         first_name: req.body.first_name,
