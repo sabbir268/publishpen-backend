@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const UserSchema = new mongoose.Schema({
     username: {
@@ -10,13 +11,14 @@ const UserSchema = new mongoose.Schema({
     last_name: { type: String, default: "" },
     email: {
         type: String,
-        unique: true,
+        unique: [true, "Please provied a password"],
         required: true,
     },
-    hashed_password: {
+    password: {
         type: String,
         unique: true,
-        required: true,
+        required: [true, "Please provied a password"],
+        select: false,
     },
     verification_code: { type: String, default: "" },
     authToken: { type: String, default: "" },
@@ -24,15 +26,9 @@ const UserSchema = new mongoose.Schema({
     is_admin: { type: Boolean, default: false },
 }, { timestamps: true });
 
-// UserSchema.virtual("password")
-//     .set(function(password) {
-//         this._password = password;
-//         this.hashed_password = this.encryptPassword(password);
-//     })
-//     .get(function() {
-//         return this._password;
-//     });
-
+// UserSchema.virtual("password").set((password) => {
+//     this.hashed_password = await bcrypt.hash(password, 10);
+// });
 
 // UserSchema.methods = {
 //     encryptPassword: function(password) {
@@ -49,20 +45,13 @@ const UserSchema = new mongoose.Schema({
  * Statics
  */
 
-UserSchema.statics = {
-    /**
-     * Load
-     *
-     * @param {Object} options
-     * @param {Function} cb
-     * @api private
-     */
+// UserSchema.statics = {
 
-    load: function(options, cb) {
-        options.select = options.select || "first_name last_name username";
-        return this.findOne(options.criteria).select(options.select).exec(cb);
-    },
-};
+//     load: function(options, cb) {
+//         options.select = options.select || "first_name last_name username";
+//         return this.findOne(options.criteria).select(options.select).exec(cb);
+//     },
+// };
 
 const User = mongoose.model("User", UserSchema);
 

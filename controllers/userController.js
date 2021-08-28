@@ -1,7 +1,8 @@
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
+const asyncHandle = require("../utils/asyncHandle");
 
-exports.create = async(req, res, next) => {
+exports.create = asyncHandle(async(req, res, next) => {
     let { password } = req.body;
     let hashed_password = await bcrypt.hash(password, 10);
     const newUser = await User.create({
@@ -9,8 +10,8 @@ exports.create = async(req, res, next) => {
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         email: req.body.email,
-        hashed_password: hashed_password,
+        password: hashed_password,
     });
 
-    res.status(201).json({ newUser });
-};
+    res.send(newUser);
+});
