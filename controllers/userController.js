@@ -1,8 +1,11 @@
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const asyncHandle = require("../utils/asyncHandle");
+// import validateReques from middleware folder
+const { checkValidation } = require("../middleware/validateRequest");
 
 exports.create = asyncHandle(async(req, res, next) => {
+    checkValidation(req);
     let hashed_password = await bcrypt.hash(req.body.password, 10);
     const newUser = await User.create({
         username: req.body.username,

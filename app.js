@@ -17,6 +17,7 @@ fs.readdirSync(models)
     .filter((file) => ~file.search(/^[^.].*\.js$/))
     .forEach((file) => require(join(models, file)));
 
+
 var app = express();
 
 app.use(logger("dev"));

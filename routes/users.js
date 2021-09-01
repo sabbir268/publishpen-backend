@@ -1,9 +1,11 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 
-// create a router to insert data via userController
-var userController = require("../controllers/userController");
+// import validateReques from middleware folder
+const { createUserSchema } = require("../middleware/validateRequest");
 
-router.post("/create", userController.create);
+const userController = require("../controllers/userController");
+
+router.post("/create", createUserSchema, userController.create);
 
 module.exports = router;
