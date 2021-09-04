@@ -18,6 +18,7 @@ const UserSchema = new mongoose.Schema({
         unique: false,
         required: [true, "Please provied a password"],
     },
+    password_reset_token: { type: String, default: "" },
     verification_code: { type: String, default: "" },
     authToken: { type: String, default: "" },
     is_verified: { type: Boolean, default: false },
