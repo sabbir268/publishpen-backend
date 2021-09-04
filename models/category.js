@@ -4,6 +4,10 @@ const CategorySchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
+    },
+    slug: {
+        type: String,
+        required: true,
         unique: true,
     },
     description: {
@@ -15,6 +19,11 @@ const CategorySchema = new mongoose.Schema({
         default: "",
     },
 }, { timestamps: true });
+
+CategorySchema.pre("save", function(next) {
+    this.slug = this.title.split(" ").join("-");
+    next();
+});
 
 const Category = mongoose.model("Category", CategorySchema);
 

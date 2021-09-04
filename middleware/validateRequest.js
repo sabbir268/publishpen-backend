@@ -1,7 +1,6 @@
 const { body, check, validationResult } = require("express-validator");
 const User = require("../models/user");
 const HttpException = require("../utils/httpException");
-const AppError = require("../utils/appError");
 
 exports.createUserSchema = [
     check("username")
@@ -64,6 +63,23 @@ exports.createUserSchema = [
     .withMessage(
         "Confirm password field must have the same value as the password field"
     ),
+];
+
+exports.createCategorySchema = [
+    check("name")
+    .exists()
+    .withMessage("Name is required")
+    .isString()
+    .withMessage("Must be only alphabetical chars")
+    .isLength({ min: 3 })
+    .withMessage("Must be at least 3 chars long"),
+
+    check("description")
+    .notEmpty()
+    .isString()
+    .withMessage("Must be only alphabetical chars")
+    .isLength({ min: 3 })
+    .withMessage("Must be at least 3 chars long"),
 ];
 
 exports.checkValidation = (req) => {
