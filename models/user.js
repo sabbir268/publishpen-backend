@@ -17,7 +17,6 @@ const UserSchema = new mongoose.Schema({
         type: String,
         unique: false,
         required: [true, "Please provied a password"],
-        select: false,
     },
     verification_code: { type: String, default: "" },
     authToken: { type: String, default: "" },

@@ -11,12 +11,12 @@ const models = join(__dirname, "./models");
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
+const authRouter = require("./routes/auth");
 
 // Bootstrap models
 fs.readdirSync(models)
     .filter((file) => ~file.search(/^[^.].*\.js$/))
     .forEach((file) => require(join(models, file)));
-
 
 var app = express();
 
@@ -27,6 +27,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/api", indexRouter);
+app.use("/api", authRouter);
 app.use("/api/users", usersRouter);
 
 module.exports = app;
