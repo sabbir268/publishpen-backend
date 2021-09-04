@@ -52,8 +52,8 @@ exports.login = asyncHandle(async(req, res, next) => {
     }
 
     // user matched!
-    const secretKey = process.env.SECRET_JWT || "publishpen";
-    const token = jwt.sign({ user_id: user.id.toString() }, secretKey, {
+    const secretKey = process.env.JWT_SECRET || "";
+    const token = jwt.sign({ username: user.username }, secretKey, {
         expiresIn: "8760h",
     });
 

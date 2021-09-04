@@ -1,19 +1,15 @@
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const asyncHandle = require("../utils/asyncHandle");
-// import validateReques from middleware folder
-const { checkValidation } = require("../middleware/validateRequest");
 
-exports.create = asyncHandle(async(req, res, next) => {
-    checkValidation(req);
-    let hashed_password = await bcrypt.hash(req.body.password, 10);
-    const newUser = await User.create({
-        username: req.body.username,
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        email: req.body.email,
-        password: hashed_password,
-    });
+// get all users if auth is user is admin
+exports.getAllUsers = asyncHandle(async(req, res, next) => {
+    // if (req.user.role !== "admin") {
+    //     return res.status(403).send("Access denied");
+    // }
 
-    res.send(newUser);
+    console.log(req.user);
+
+    const users = await User.find({});
+    res.status(200).send(users);
 });
