@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const asyncHandle = require("../utils/asyncHandle");
 
-const auth = (is_admin = false) => {
+const auth = (is_admin = "") => {
     return asyncHandle(async function(req, res, next) {
         try {
             const authHeader = req.headers.authorization;
@@ -33,7 +33,7 @@ const auth = (is_admin = false) => {
             // if the current user is not the owner and
             // if the user role don't have the permission to do this action.
             // the user will get this error
-            if (!ownerAuthorized && is_admin && !user.is_admin) {
+            if (!ownerAuthorized && is_admin == "admin" && !user.is_admin) {
                 return next(new HttpException(401, "error", "Unauthorized!"));
             }
 

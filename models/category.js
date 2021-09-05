@@ -20,8 +20,8 @@ const CategorySchema = new mongoose.Schema({
     },
 }, { timestamps: true });
 
-CategorySchema.pre("save", function(next) {
-    this.slug = this.title.split(" ").join("-");
+CategorySchema.pre("validate", function(next) {
+    this.slug = this.name.split(" ").join("-").toLowerCase();
     next();
 });
 

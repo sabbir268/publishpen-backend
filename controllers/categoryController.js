@@ -35,10 +35,11 @@ exports.getOneCategory = asyncHandle(async(req, res, next) => {
 exports.updateCategory = asyncHandle(async(req, res, next) => {
     checkValidation(req);
 
-    const category = await Category.findByIdAndUpdate(req.params.id, req.body, {
-        new: true,
-        runValidators: true,
-    });
+    const category = await Category.findOneAndUpdate({ slug: req.params.slug },
+        req.body, {
+            runValidators: true,
+        }
+    );
 
     if (!category) {
         return next(new HttpException(404, "Category not found"));
@@ -49,7 +50,7 @@ exports.updateCategory = asyncHandle(async(req, res, next) => {
 
 // delete category
 exports.deleteCategory = asyncHandle(async(req, res, next) => {
-    const category = await Category.findByIdAndDelete(req.params.id);
+    const category = await Category.findOneAndDelete(req.params.slug);
 
     if (!category) {
         return next(new HttpException(404, "Category not found"));

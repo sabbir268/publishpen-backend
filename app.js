@@ -12,6 +12,7 @@ const models = join(__dirname, "./models");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const authRouter = require("./routes/auth");
+const categoryRouter = require("./routes/category");
 
 // Bootstrap models
 fs.readdirSync(models)
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/api", indexRouter);
 app.use("/api", authRouter);
 app.use("/api/user", usersRouter);
+app.use("/api/category", categoryRouter);
 
 module.exports = app;
 

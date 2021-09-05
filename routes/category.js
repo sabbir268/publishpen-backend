@@ -6,13 +6,13 @@ const categoryController = require("../controllers/categoryController");
 
 router
     .route("/")
-    .post(auth(true), categoryController.createCategory)
-    .get(auth(true), categoryController.getAllCategories);
+    .post(auth("admin"), categoryController.createCategory)
+    .get(auth("admin"), categoryController.getAllCategories);
 
 router
-    .route("/:id")
-    .get(auth(true), categoryController.getCategory)
-    .put(auth(true), categoryController.updateCategory)
-    .delete(auth(true), categoryController.deleteCategory);
+    .route("/:slug")
+    .get(auth("admin"), categoryController.getOneCategory)
+    .put(auth("admin"), categoryController.updateCategory)
+    .delete(auth("admin"), categoryController.deleteCategory);
 
 module.exports = router;
