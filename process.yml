@@ -1,0 +1,5 @@
+apps:
+    - name: publishpenapp
+      script: ./bin/www
+      exec_mode: cluster
+      instances: max
