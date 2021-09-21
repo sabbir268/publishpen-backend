@@ -42,5 +42,5 @@ jobs:
           script: |
             docker stop $(docker ps -a -q)
             docker login docker.pkg.github.com -u $GITHUB_USERNAME -p $GITHUB_TOKEN
-            docker pull docker.pkg.github.com/sabbir268/publishpen-backend/publishpen-backend:latest
-            docker run -dit -p 80:3000 docker.pkg.github.com/sabbir268/publishpen-backend/publishpen-backend:latest
+            docker pull ghcr.io/sabbir268/publishpen-backend/publishpen-backend:latest
+            docker run -dit -p 80:3000 docker pull ghcr.io/sabbir268/publishpen-backend/publishpen-backend:latest
