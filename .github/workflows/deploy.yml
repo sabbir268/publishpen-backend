@@ -37,7 +37,7 @@ jobs:
           host: ${{ secrets.HOST_IP }}
           username: ${{ secrets.HOST_USER }}
           password: ${{ secrets.HOST_PASSWORD }}
-          # port: ${{ secrets.HOST_PORT }}
+          # port: ${{ secrets.HOST_PORT }} s
           envs: GITHUB_USERNAME, GITHUB_TOKEN
           script: |
             docker stop $(docker ps -a -q)
