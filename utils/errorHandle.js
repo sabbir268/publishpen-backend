@@ -58,7 +58,7 @@ const sendErrorDev = async(err, req, res) => {
     // B) RENDERED WEBSITE
     console.error("ERROR 💥", err);
     // const errorId = await saveError(err);
-    return res.status(err.statusCode).render("error", {
+    return res.send("error", {
         title: "Something went wrong!",
         msg: `${err.message}`,
     });
