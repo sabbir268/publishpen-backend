@@ -52,7 +52,7 @@ exports.login = asyncHandle(async(req, res, next) => {
     }
 
     // user matched!
-    const secretKey = process.env.JWT_SECRET || "";
+    const secretKey = process.env.JWT_SECRET || "secret12345678";
     const token = jwt.sign({ username: user.username }, secretKey, {
         expiresIn: "8760h",
     });

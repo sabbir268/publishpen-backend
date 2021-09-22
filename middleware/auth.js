@@ -18,7 +18,7 @@ const auth = (is_admin = "") => {
             }
 
             const token = authHeader.replace(bearer, "");
-            const secretKey = process.env.JWT_SECRET || "";
+            const secretKey = process.env.JWT_SECRET || "secret12345678";
             // Verify Token
             const decoded = jwt.verify(token, secretKey);
             const user = await User.findOne({ username: decoded.username });
